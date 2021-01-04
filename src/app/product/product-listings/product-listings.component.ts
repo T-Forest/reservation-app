@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { products } from 'src/app/products';
+import { ProductService } from '../shared/product.service';
+
+
 
 @Component({
   selector: 'app-product-listings',
@@ -8,11 +10,19 @@ import { products } from 'src/app/products';
 })
 export class ProductListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private productService: ProductService) { }
 
-  products: any = products;
+  products: any;
 
   ngOnInit(): void {
+    const productsObservable = this.productService.getProducts()
+    productsObservable.subscribe(
+      (data) => {
+        this.products = data
+      },
+      (err) => {console.log('err')},
+      // () => {console.log('complete')}　:不要。completeは正常なresponseならば必ず通過する。
+    )
   }
 
 }
