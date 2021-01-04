@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-sm" *ngFor="let item of products; let productId = index">
             <div class="card">
-                <a [routerLink]="[productId]">
+                <a [routerLink]="[item._id]">
                     <img class="bd-placeholder-img card-img-top" src="{{item.coverImage}}" >
                     <div class="card-body">
                         <p class="card-text">
